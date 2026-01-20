@@ -1,0 +1,21 @@
+services:
+  backend-service:
+    build: ./backend
+    ports:
+      - "3000:3000"
+    networks:
+      - app-network
+    volumes:
+      - ./backend/logs:/app/logs
+
+  frontend-service:
+    image: node:18-alpine
+    working_dir: /app
+    ports:
+      - "8080:8080"
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
