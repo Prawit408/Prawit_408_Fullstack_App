@@ -11,10 +11,13 @@ services:
   frontend-service:
     image: node:18-alpine
     working_dir: /app
+    volumes:
+      - ./frontend:/app
     ports:
       - "8080:8080"
     networks:
       - app-network
+    command: sh -c "npm install && npx quasar dev --hostname 0.0.0.0"
 
 networks:
   app-network:
